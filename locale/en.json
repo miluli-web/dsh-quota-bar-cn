@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DSH quota bar",
+    "description": "A quota pill pinned to the DSH conversation header, showing today's spend and the remaining DeepSeek account balance. It turns amber when the balance runs low, refreshes on click, and opens the official DeepSeek usage page when the balance is double-clicked."
+  }
+}
