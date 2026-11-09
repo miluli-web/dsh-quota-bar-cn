@@ -151,8 +151,9 @@ window.__ModuleLoader__.load({
               usageUrl: typeof data?.links?.usageUrl === 'string' && data.links.usageUrl !== '' ? data.links.usageUrl : null,
               updatedAt: Number(data?.updatedAt) || Date.now(),
             })
-          } catch {
-            setSnapshot((previous) => (previous.phase === 'ready' ? previous : { phase: 'failed' }))
+          } catch (error) {
+            const message = error instanceof Error ? error.message : String(error)
+            setSnapshot((previous) => (previous.phase === 'ready' ? previous : { phase: 'failed', error: message }))
           }
         }, [])
 
@@ -196,7 +197,8 @@ window.__ModuleLoader__.load({
         } else if (snapshot.phase === 'loading') {
           children = h('span', { className: 'dsh-qbar__label' }, copy.loading)
         } else {
-          const text = snapshot.phase === 'signedOut' ? copy.signedOut : copy.failed
+          const base = snapshot.phase === 'signedOut' ? copy.signedOut : copy.failed
+          const text = snapshot.error ? `${base} ${snapshot.error}` : base
           children = h('span', { className: 'dsh-qbar__label' }, text)
         }
 

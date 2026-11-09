@@ -1,6 +1,6 @@
 {
   "name": "dsh-quota-bar-cn",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "在 DSH 会话视图顶部常驻一条额度胶囊，实时显示 DeepSeek 账号的今日已用金额与剩余额度。余额偏低自动变色提醒，单击刷新，双击剩余额度跳转 DeepSeek 官方用量页。",
   "type": "module",
   "exports": {

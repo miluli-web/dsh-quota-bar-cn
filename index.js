@@ -11,6 +11,8 @@
 export const inject = ['webServer']
 
 const BALANCE_ROUTE = '/dsh-quota-bar-cn/balance'
+/** Pre-rename path, kept so a page still running the previous Client module keeps working. */
+const LEGACY_BALANCE_ROUTE = '/dsh-quota-bar/balance'
 const BALANCE_CACHE_MS = 30_000
 const UPSTREAM_TIMEOUT_MS = 15_000
 const OFFICIAL_BALANCE_URL = 'https://api.deepseek.com/user/balance'
@@ -128,9 +130,11 @@ export function apply(ctx) {
     })
   }
 
-  ctx.effect(() => ctx.webServer.register({
-    kind: 'exact',
-    path: BALANCE_ROUTE,
-    resource: handle,
-  }))
+  for (const path of [BALANCE_ROUTE, LEGACY_BALANCE_ROUTE]) {
+    ctx.effect(() => ctx.webServer.register({
+      kind: 'exact',
+      path,
+      resource: handle,
+    }))
+  }
 }
